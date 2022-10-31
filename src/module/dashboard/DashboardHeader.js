@@ -43,7 +43,7 @@ const DashboardHeader = () => {
     <DashboardHeaderStyles>
       <NavLink to="/" className="logo">
         <img srcSet="/logo.png" alt="monkey-blogging" className="logo" />
-        <span className="hidden lg:inline-block">Monkey Blogging</span>
+        <span className="hidden lg:inline-block">Brave Blog</span>
       </NavLink>
       <div className="header-right">
         <Button to="/manage/add-post" className="header-button" height="52px">
