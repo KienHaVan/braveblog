@@ -66,7 +66,7 @@ const HomeNewest = () => {
       <div className="container">
         <Heading>
           <div
-            className="cursor-pointer"
+            className="cursor-pointer inline-block"
             onClick={() => navigate("/post/latest")}
           >
             Latest posts
