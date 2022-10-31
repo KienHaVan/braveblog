@@ -36,7 +36,12 @@ const Footer = () => {
             }}
           >
             <div className="w-[80px] h-[80px] flex items-center justify-center bg-white rounded-full mb-3">
-              <img srcSet="logo.png" alt="" className="max-w-[60px]" />
+              <img
+                // srcSet={`logo.png` || "https://ibb.co/CPnG6bN"}
+                src="https://i.ibb.co/BngMGyd/icons8-brave-web-browser-240.png"
+                alt=""
+                className="max-w-[60px]"
+              />
             </div>
             <h3 className="text-white font-medium text-2xl">Brave Blog</h3>
           </div>
