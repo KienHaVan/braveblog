@@ -10,11 +10,13 @@ import {
 import PostFeatureItem from "module/post/PostFeatureItem";
 import React, { useEffect, useState } from "react";
 import { withErrorBoundary } from "react-error-boundary";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 const HomeFeatureStyles = styled.div``;
 
 const HomeFeature = () => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const colRef = collection(db, "posts");
     const queries = query(
@@ -38,7 +40,14 @@ const HomeFeature = () => {
   return (
     <HomeFeatureStyles className="home-block">
       <div className="container">
-        <Heading>Featured posts</Heading>
+        <Heading>
+          <div
+            className="cursor-pointer"
+            onClick={() => navigate("/post/feature")}
+          >
+            Featured posts
+          </div>
+        </Heading>
         <div className="grid-layout">
           {posts.map((post) => (
             <PostFeatureItem key={post.id} data={post}></PostFeatureItem>

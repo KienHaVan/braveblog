@@ -1,3 +1,4 @@
+import PostPage from "pages/PostPage";
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth-context";
@@ -44,6 +45,7 @@ function App() {
               path="/category/:slug"
               element={<CategoryPage></CategoryPage>}
             ></Route>
+            <Route path="/post/:slug" element={<PostPage></PostPage>}></Route>
             <Route
               path="/:slug"
               element={<PostDetailsPage></PostDetailsPage>}

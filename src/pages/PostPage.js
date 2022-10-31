@@ -1,12 +1,47 @@
-import React from "react";
+import Heading from "components/layout/Heading";
+import Layout from "components/layout/Layout";
+import { db } from "firebase-app/firebase-config";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import PostItem from "module/post/PostItem";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const PostPage = () => {
+  const [posts, setPosts] = useState([]);
+  const params = useParams();
+  console.log(params);
+  useEffect(() => {
+    async function fetchData() {
+      const docRef = query(
+        collection(db, "posts"),
+        where("hot", "==", params.slug === "feature")
+      );
+      onSnapshot(docRef, (snapshot) => {
+        const results = [];
+        snapshot.forEach((doc) => {
+          results.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setPosts(results);
+      });
+    }
+    fetchData();
+  }, [params.slug]);
+  if (posts.length <= 0) return null;
   return (
-    <div>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio laborum
-      nulla mollitia libero esse ad at voluptate incidunt error! Accusantium,
-      dolorem nisi inventore accusamus dicta eius vero earum sapiente deserunt.
-    </div>
+    <Layout isFlex={true}>
+      <div className="container flex-1">
+        <div className="pt-10"></div>
+        <Heading>Danh mục {params.slug}</Heading>
+        <div className="grid-layout grid-layout--primary mb-10">
+          {posts.map((item) => (
+            <PostItem key={item.id} data={item}></PostItem>
+          ))}
+        </div>
+      </div>
+    </Layout>
   );
 };
 

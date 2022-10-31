@@ -10,6 +10,7 @@ import {
 import PostNewestItem from "module/post/PostNewestItem";
 import PostNewestLarge from "module/post/PostNewestLarge";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v4 } from "uuid";
 
@@ -38,6 +39,7 @@ const HomeNewestStyles = styled.div`
 
 const HomeNewest = () => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const colRef = collection(db, "posts");
     const queries = query(
@@ -62,7 +64,14 @@ const HomeNewest = () => {
   return (
     <HomeNewestStyles className="home-block">
       <div className="container">
-        <Heading>Latest posts</Heading>
+        <Heading>
+          <div
+            className="cursor-pointer"
+            onClick={() => navigate("/post/latest")}
+          >
+            Latest posts
+          </div>
+        </Heading>
         <div className="layout">
           <PostNewestLarge data={first}></PostNewestLarge>
           <div className="sidebar">
